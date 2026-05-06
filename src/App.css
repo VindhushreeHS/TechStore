@@ -1,0 +1,313 @@
+:root {
+  --bg-dark: #050505;
+  --accent-blue: #007bff;
+  --text-dim: #a0a0a0;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-dark);
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Navbar Layout & Navigation Links */
+.navbar {
+  padding: 20px 0;
+  background: rgba(5, 5, 5, 0.8);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon { color: var(--accent-blue); }
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  transition: 0.3s;
+}
+
+.nav-link:hover { color: white; }
+
+/* Navbar Buttons & Action Clusters */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: opacity 0.2s ease;
+}
+
+.nav-btn:hover {
+  opacity: 0.8;
+}
+
+.nav-btn.primary {
+  background: var(--accent-blue);
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* Cart & Wishlist Badge Micro-layouts */
+.cart-btn {
+  position: relative;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px !important;
+}
+
+.cart-count {
+  position: absolute;
+  top: -2px;
+  right: -5px;
+  background: #ff4d4f; /* Notification Red color */
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  height: 16px;
+  min-width: 16px;
+  padding: 0 4px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* Hero Section Branding */
+.hero {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.hero-tag {
+  color: var(--accent-blue);
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.hero-title {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.hero-highlight { color: var(--accent-blue); }
+
+.hero-description {
+  max-width: 650px;
+  margin: 0 auto 40px;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 60px;
+}
+
+.btn-primary {
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.05);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 15px 35px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+}
+
+.stat-number { display: block; font-size: 2rem; font-weight: bold; }
+.stat-label { color: var(--text-dim); font-size: 0.9rem; }
+
+/* Grid & Section Controls Layout */
+.products-section {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-title {
+  color: white;
+  font-weight: bold;
+  font-size: 2.5rem;
+  margin: 0 0 10px 0;
+}
+
+.section-subtitle {
+  color: var(--text-dim);
+  font-size: 1.05rem;
+}
+
+/* Filter Controls Toolbar Layout */
+.filter-controls {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: wrap; /* Wraps fields gracefully on narrow phone viewports */
+}
+
+.filter-group, .filterd-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-input, .filter-select {
+  width: 100%;
+  padding: 12px 16px;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  color: white;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.search-input:focus, .filter-select:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.filter-select option {
+  background: #111;
+  color: white;
+}
+
+/* Product Card Grid Alignment */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* Wishlist Action Button Style for ProductCard */
+.wishlisted {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.wishlisted:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* App.css */
+
+:root {
+  /* Dark Mode (Default) */
+  --bg-main: #050505;
+  --bg-card: #111111;
+  --text-main: #ffffff;
+  --text-dim: #a0a0a0;
+  --accent-blue: #007bff;
+  --border: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] {
+  /* Light Mode */
+  --bg-main: #ffffff;
+  --bg-card: #f5f5f5;
+  --text-main: #1a1a1a;
+  --text-dim: #666666;
+  --accent-blue: #0056b3;
+  --border: rgba(0, 0, 0, 0.1);
+}
+
+/* IMPORTANT: Update your existing styles to use these variables */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
