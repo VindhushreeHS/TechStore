@@ -300,7 +300,6 @@ body {
   --border: rgba(0, 0, 0, 0.1);
 }
 
-/* IMPORTANT: Update your existing styles to use these variables */
 body {
   background-color: var(--bg-main);
   color: var(--text-main);

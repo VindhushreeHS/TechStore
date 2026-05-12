@@ -1,17 +1,34 @@
 import ProductCard from "./components/ProductCard";
 import "./App.css";
 import products from "./data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
 
   const allBrands = [...new Set(products.map(p => p.brand))];
   
   // Cart - array of products in cart
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(()=>{
+    const savedCartItem = localStorage.getItem("myCart");
+
+    try {
+      return savedCartItem !== null ? JSON.parse(savedCartItem) : [];
+    } catch (error) {
+      console.log("Problem !!!", error);
+    }
+  });
 
   // Wishlist - array of products keys that are wishlisted
-  const [wishlist, setWishlist] = useState([]);
+  const [wishlist, setWishlist] = useState(()=>{
+    const savedWishlist = localStorage.getItem("myWishlist");
+
+    try {
+      return savedWishlist ? JSON.parse(savedWishlist) : [];
+    } catch (error) {
+      console.log("Problem !!!", error);
+    }
+  });
+
 
   // Search - what user types in the search tab
   const [searchItem, setSearchItem] = useState("");
@@ -23,6 +40,16 @@ function App() {
   const [sortBy, setSortBy] = useState("default");
 
   const [isDark, setIsDark] = useState(true);
+
+
+  useEffect(()=>{
+    localStorage.setItem("myCart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(()=>{
+      localStorage.setItem("myWishlist", JSON.stringify(wishlist));
+  }, [wishlist]);
+
 
   function addToCart(product) {
     const existingItem = cartItems.find(item => item.key === product.key);
