@@ -289,7 +289,6 @@ function App() {
           ))}
         </div>
 
-        {/* Empty State message if no products match filters */}
         {filteredProducts.length === 0 && (
           <div
             style={{
