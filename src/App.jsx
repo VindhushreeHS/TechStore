@@ -1,8 +1,12 @@
-import ProductCard from "./components/ProductCard";
 import "./App.css";
 import products from "./data";
 import { useRef, useEffect, useState } from "react";
 import User from "./components/User";
+import NavLogo from "./components/NAN-BAR/NavLogo";
+import NavLinks from "./components/NAN-BAR/NavLinks";
+import Hero from "./components/HERO-SECTION/Hero";
+import BestSeller from "./components/SECTIONS/BestSeller";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const allBrands = [...new Set(products.map((p) => p.brand))];
@@ -44,7 +48,7 @@ function App() {
   // Sort criteria state (Initialized to a string instead of an empty array)
   const [sortBy, setSortBy] = useState("default");
 
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState("dark");
 
   useEffect(() => {
     localStorage.setItem("myCart", JSON.stringify(cartItems));
@@ -124,34 +128,10 @@ function App() {
     <div className="app" ref={topRef}>
       {/* Navigation Bar */}
       <nav className="navbar">
-        <div className="nav-container">
-          <a href="/" className="logo">
-            <span className="logo-icon">◆</span>
-            TechStore
-          </a>
+        <NavLogo TechStore="TechStore" />
 
-          <ul className="nav-links">
-            <li>
-              <a href="#" className="nav-link">
-                Products
-              </a>
-            </li>
-            <li>
-              <a href="#" className="nav-link">
-                Deals
-              </a>
-            </li>
-            <li>
-              <a href="#" className="nav-link">
-                Support
-              </a>
-            </li>
-            <li>
-              <a href="#" className="nav-link">
-                About
-              </a>
-            </li>
-          </ul>
+        <div className="nav-container">
+          <NavLinks />
 
           <div className="nav-actions">
             <button onClick={toggleTheme} className="nav-btn">
@@ -178,146 +158,24 @@ function App() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <p className="hero-tag">New Arrivals 2026</p>
-          <h1 className="hero-title">
-            The Future of Tech <br />
-            <span className="hero-highlight">Is Here.</span>
-          </h1>
-          <p className="hero-description">
-            Discover the latest in premium technology. From powerful computers
-            to cutting-edge smartphones, find everything you need in one place.
-          </p>
+      <Hero />
 
-          <div className="hero-cta">
-            <button className="btn-primary">Explore Products</button>
-            <button className="btn-secondary">Learn More</button>
-          </div>
+      <BestSeller
+        allBrands={allBrands}
+        searchItem={searchItem}
+        selectedBrand={selectedBrand}
+        sortBy={sortBy}
+        onSearchChange={(e) => setSearchItem(e.target.value)}
+        onBrandChange={(e) => setSelectedBrand(e.target.value)}
+        onSortChange={(e) => setSortBy(e.target.value)}
+        filteredProducts={filteredProducts}
+        wishlist={wishlist}
+        onAddToCart={addToCart}
+        onToggleWishlist={toggleWishlist}
+      />
 
-          <div className="hero-stats">
-            <div className="stat">
-              <span className="stat-number">50K+</span>
-              <span className="stat-label">Happy Customers</span>
-            </div>
-            <div className="stat">
-              <span className="stat-number">200+</span>
-              <span className="stat-label">Premium Products</span>
-            </div>
-            <div className="stat">
-              <span className="stat-number">24/7</span>
-              <span className="stat-label">Customer Support</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Products Section */}
-      <section className="products-section" id="product">
-        <div className="section-header">
-          <h2 className="section-title">Best Sellers</h2>
-          <p className="section-subtitle">
-            Our most popular products loved by customers
-          </p>
-          <br />
-        </div>
-
-        <div className="filter-controls">
-          <div className="filter-group">
-            <input
-              type="text"
-              placeholder="Search for a product..."
-              value={searchItem}
-              onChange={(e) => {
-                setSearchItem(e.target.value);
-              }}
-              className="search-input"
-            />
-          </div>
-          <div className="filter-group">
-            <select
-              value={selectedBrand}
-              onChange={(e) => {
-                setSelectedBrand(e.target.value);
-              }}
-              className="filter-select"
-            >
-              {/* BUG FIX: Changed matching option value from "ALL" to "All" */}
-              <option value="All">All Brands</option>
-              {allBrands.map((brand) => (
-                <option key={brand} value={brand}>
-                  {brand}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="filter-group">
-            <select
-              value={sortBy}
-              onChange={(e) => {
-                setSortBy(e.target.value);
-              }}
-              className="filter-select"
-            >
-              <option value="default">Sort By</option>
-              <option value="price-low">Price low to high</option>
-              <option value="price-high">Price high to low</option>
-              <option value="rating">Rating</option>
-              <option value="name">Name</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="product-grid">
-          {filteredProducts.map((data) => (
-            <ProductCard
-              key={data.key}
-              id={data.key}
-              image={data.image}
-              name={data.name}
-              price={data.price}
-              originalPrice={data.originalPrice}
-              discount={data.discount}
-              rating={data.rating}
-              isBestSeller={data.isBestSeller}
-              isWishlisted={wishlist.includes(data.key)}
-              onAddToCart={() => addToCart(data)}
-              onToggleWishlist={() => toggleWishlist(data.key)}
-            />
-          ))}
-        </div>
-
-        {filteredProducts.length === 0 && (
-          <div
-            style={{
-              textAlign: "center",
-              color: "var(--text-dim)",
-              margin: "40px 0",
-            }}
-          >
-            <h3>No items found matching your search.</h3>
-          </div>
-        )}
-      </section>
-
-      <footer className="footer">
-        <p>&copy; 2024 TechStore. All rights reserved.</p>
-        <button
-          style={{
-            position: "fixed",
-            bottom: "30px",
-            right: "30px",
-            width: "50px",
-          }}
-          onClick={scrollOnTop}
-        >
-          Back
-        </button>
-      </footer>
+      <Footer onScrollOnTop={scrollOnTop} />
     </div>
   );
 }
-
 export default App;
