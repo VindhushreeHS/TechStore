@@ -27,7 +27,7 @@ export default function NavActions({
       <button className="nav-btn">Sign In</button>
       <button className="nav-btn primary">Shop Now</button>
 
-      <User userName="Vindhu" />
+      <User />
     </div>
   );
 }
