@@ -1,12 +1,12 @@
 import "./App.css";
 import products from "./data";
 import { useRef, useEffect, useState } from "react";
-import User from "./components/User";
 import NavLogo from "./components/NAN-BAR/NavLogo";
 import NavLinks from "./components/NAN-BAR/NavLinks";
 import Hero from "./components/HERO-SECTION/Hero";
 import BestSeller from "./components/SECTIONS/BestSeller";
 import Footer from "./components/Footer/Footer";
+import NavActions from "./components/NAN-BAR/NavActions";
 
 function App() {
   const allBrands = [...new Set(products.map((p) => p.brand))];
@@ -133,28 +133,12 @@ function App() {
         <div className="nav-container">
           <NavLinks />
 
-          <div className="nav-actions">
-            <button onClick={toggleTheme} className="nav-btn">
-              {isDark === "dark" ? "☀️ Light Mode" : " 🌑 Dark Mode"}
-            </button>
-
-            <button className="nav-btn cart-btn">
-              ❤️{" "}
-              {wishlist.length > 0 && (
-                <span className="cart-count">{wishlist.length}</span>
-              )}
-            </button>
-
-            <button className="nav-btn cart-btn">
-              🛒{" "}
-              {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
-            </button>
-
-            <button className="nav-btn">Sign In</button>
-            <button className="nav-btn primary">Shop Now</button>
-
-            <User userName="Vindhu" />
-          </div>
+          <NavActions
+            wishlist={wishlist}
+            onToggleTheme={toggleTheme}
+            isDark={isDark}
+            cartCount={cartCount}
+          />
         </div>
       </nav>
 
